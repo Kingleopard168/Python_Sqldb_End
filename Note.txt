@@ -1,0 +1,35 @@
+from book_outlet.models import Book 
+>>> harry_potter = Book(title="Harry Potter 1 - The Philosopher's Stone", rating 5) File "", line 1 harry_potter = Book(title="Harry Potter 1 - The Philosopher's Stone", rating 5) ^^^^^^^^ SyntaxError: invalid syntax. Perhaps you forgot a comma? 
+>>> harry_potter = Book(title="Harry Potter 1 - The Philosopher's Stone", rating=5) 
+>>> harry_potter.save() 
+>>> lord_pf_the_rings = Book(title="Lord of the Rings", rating=4) 
+>>> lord_pf_the_rings.save() 
+>>> Book.objects.all() <QuerySet [<Book: Harry Potter 1 - The Philosopher's Stone (5)>, <Book: Lord of the Rings (4)>]> 
+>>> harry_potter = Book.objects.all()[0] 
+>>> harry_potter.title "Harry Potter 1 - The Philosopher's Stone" 
+>>> lotr = Book.objects.all()[1] 
+>>> lotr.title 'Lord of the Rings' 
+>>> harry_potter.author = "J.K. rowling" 
+>>> harry_potter.is_bestselling = True 
+>>> harry_potter.save() 
+>>> Book.objects.all()[0].author 'J.K. rowling' 
+>>> lotr.author = "J.R.R. Tolkien" 
+>>> lotr.is_bestselling = True 
+>>> lotr.save() 
+>>> Book.objects.all()[1].author 'J.R.R. Tolkien' 
+>>> Book.objects.all()[1].is_bestselling True 
+>>> harry_potter = Book.objects.all()[0]
+>>> harry_potter.delete()
+>>> Book.objects.all()
+<QuerySet [<Book: Lord of the Rings (4)>]>
+>>> Book.objects.all()[0]
+<Book: Lord of the Rings (4)>
+>>> Book.objects.create(title="My story", rating=2, author="Max", is_bestselling=False)
+>>> Book.objects.create(title="Some random book", rating=1, author="Random Dude", is_bestselling=False)
+>>> Book.objects.all()
+<QuerySet [<Book: Lord of the Rings (4)>, <Book: Harry Potter 1 (5)>, 
+<Book: My story (2)>, <Book: Some random book (1)>]>
+>>> from django.db.models import Q
+>>> from book_outlet.models import Book
+>>> Book.objects.get(title="Harry Potter 1").save()
+>>> Book.objects.get(title="Harry Potter 1").slug
